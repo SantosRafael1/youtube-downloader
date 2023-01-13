@@ -33,7 +33,7 @@ def download():
         with youtube_dl.YoutubeDL(options) as ydl:
             ydl.download([url_text])
     else:
-        messagebox.showinfo("Error", "Error")
+        messagebox.showinfo("Invalid URL", "Please, provide a valid URL")
 
     
 
