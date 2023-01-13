@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 import youtube_dl
 from urllib.parse import urlparse
 
@@ -32,6 +33,9 @@ def download():
 
         with youtube_dl.YoutubeDL(options) as ydl:
             ydl.download([url_text])
+            messagebox.showinfo("Downloaded", "Successfully downloaded!")
+
+
     else:
         messagebox.showinfo("Invalid URL", "Please, provide a valid URL")
 
