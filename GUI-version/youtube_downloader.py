@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 import youtube_dl
 from urllib.parse import urlparse
 
@@ -15,19 +16,24 @@ url = tk.Entry(root, width=40, textvariable=var).pack()
 
 def download():
     url_text = var.get()
-    options = {
-    'format': 'bestaudio/best',
-    'postprocessors': [{
-        'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'mp3',
-        'preferredquality': '200',
-    }],
-    #specify your own path if you want
-    'outtmpl': 'songs/%(title)s.%(ext)s'
-    }
 
-    with youtube_dl.YoutubeDL(options) as ydl:
-        ydl.download([url_text])
+    if urlparse(url_text).netloc == 'www.youtube.com' or urlparse(url_text).netloc == 'youtu.be':
+
+        options = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '200',
+        }],
+        #specify your own path if you want
+        'outtmpl': 'songs/%(title)s.%(ext)s'
+        }
+
+        with youtube_dl.YoutubeDL(options) as ydl:
+            ydl.download([url_text])
+    else:
+        messagebox.showinfo("Error", "Error")
 
     
 
